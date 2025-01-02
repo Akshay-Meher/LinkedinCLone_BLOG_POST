@@ -1,0 +1,43 @@
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.h-custom {
+    height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 100%;
+    text-decoration: none;
+    color: #444;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.google-btn:hover {
+    background-color: #f1f1f1;
+}
+
+.google-btn img {
+    width: 20px;
+    margin-right: 10px;
+}

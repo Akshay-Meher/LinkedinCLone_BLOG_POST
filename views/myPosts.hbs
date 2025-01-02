@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .navbar-brand i {
+            color: #0073b1;
+            /* LinkedIn Blue */
+        }
+
+        .navbar-nav .nav-link {
+            color: #333;
+            /* Dark gray for better readability */
+        }
+
+        .navbar-nav .nav-link.active {
+            color: #0073b1;
+            /* LinkedIn Blue for active link */
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #0056b3;
+            /* Darker blue on hover */
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 180px;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .post-card {
+            max-width: 650px;
+            margin: 20px auto;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .post-header img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .post-header .user-info {
+            flex-grow: 1;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .comments-section {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 15px;
+            border-top: 1px solid #dee2e6;
+            padding-top: 10px;
+        }
+
+        .comments-section {
+            max-height: 300px;
+            overflow-y: scroll;
+            scrollbar-width: thin;
+            scrollbar-color: transparent transparent;
+
+        }
+
+        .comment-form {
+            margin-top: 15px;
+        }
+
+        .comment-form textarea {
+            resize: none;
+        }
+
+        .carousel-img {
+            height: 400px;
+            /* Adjust height as needed */
+            object-fit: cover;
+            /* Ensure the image covers the area without distortion */
+            width: 100%;
+        }
+
+        @media (max-width: 767.98px) {
+            .post-card {
+                max-width: 90%;
+                margin: 10px auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top mb-5">
+        <div class="container">
+            <a class="navbar-brand" href="/post"><i class="fab fa-linkedin fa-2x"></i></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link  d-flex flex-column text-center" aria-current="page" href="/post">
+                            <i class="fas fa-home fa-lg"></i>
+                            <span class="small p-2"> Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link d-flex  active flex-column text-center" aria-current="page" href="/my-posts">
+                            <i class="fas fa-save fa-lg"></i>
+                            <span class="small p-2"> My Posts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/post/add-post">
+                            <i class="fas fa-plus fa-lg"></i>
+                            <span class="small p-2"> Add Post</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link d-flex flex-column align-items-center" aria-current="page"
+                            href="/my-network">
+                            <div class="position-relative">
+                                <i class="fa-solid fa-users-line fa-lg"></i>
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                    id="connections-count">
+
+                                </span>
+                            </div>
+                            <span class="small">My Network</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link d-flex flex-column align-items-center" aria-current="page"
+                            href="/chat/start">
+                            <div class="position-relative">
+                                <i class="fas fa-comment-dots"></i>
+                            </div>
+                            <span class="small">Messaging</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link d-flex flex-column align-items-center" aria-current="page"
+                            href="/notification">
+                            <div class="position-relative">
+                                <i class="fa fa-bell fa-lg"></i>
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                    id="notification-count">
+
+                                </span>
+                            </div>
+                            <span class="small">Notification</span>
+                        </a>
+                    </li>
+
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                            id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle"
+                                height="30" alt="Profile" />
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="/profile">My profile</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container mt-5 pt-5">
+
+        {{#if isPostsAvailable}}
+        <div class="row">
+            {{#each posts}}
+            <div class="post-card card">
+                <div class="card-body">
+                    <div class="post-header">
+                        {{!-- <img src="{{this.User.avatarUrl}}" alt="{{this.User.name}}"> --}}
+                        <img src="{{this.User.profileImage}}" alt="{{this.User.name}}">
+                        <div class="user-info">
+                            <h6 class="mb-0">{{this.User.name}}</h6>
+                            <small class="text-muted">{{ formatDate this.createdAt}}</small>
+                        </div>
+                    </div>
+                    <h5>{{this.title}}</h5>
+                    <p class="card-text">{{this.content}}</p>
+
+                    {{#if this.imageUrl.length}}
+                    <div id="carouselPostImages{{@index}}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {{#each this.imageUrl}}
+                            <div class="carousel-item {{#if @first}}active{{/if}}">
+                                {{!-- <img src="{{this}}" class="d-block w-100 carousel-img" alt="Image {{@index}}">
+                                --}}
+                                <img src="{{this}}" class="card-img-top carousel-img" alt="Image {{@index}}">
+                            </div>
+                            {{/each}}
+                        </div>
+                        <button class="carousel-control-prev" type="button"
+                            data-bs-target="#carouselPostImages{{@index}}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button"
+                            data-bs-target="#carouselPostImages{{@index}}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    {{/if}}
+
+
+                    {{!-- <img src="{{this.imageUrl}}" class="card-img-top" alt="{{this.title}}"> --}}
+
+                    <div class="post-actions">
+
+                        <button class="btn btn-outline-primary comment-btn">
+                            <i class="fas fa-comment"></i>
+                            Comment
+                        </button>
+
+                        <form action="/post/{{this.id}}/?_method=DELETE" method="POST"
+                            onsubmit="return confirm('Are you sure you want to delete this post?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <a href="/post/update/{{this.id}}" class="btn  btn-success">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <!-- Comments Section -->
+                    <div class="comments-section" style="display: none;">
+                        <h6 class="card-title">Comments</h6>
+                        <ul class="list-group">
+
+                            {{#each this.Comments}}
+                            <li class="list-group-item">
+                                <p><strong>{{this.user.name}}:</strong> {{this.content}}</p>
+                                <small class="text-muted">{{ formatDate this.createdAt}}</small>
+                            </li>
+                            {{/each}}
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{else}}
+
+        <div id="post-not-available" class="alert alert-warning text-center" role="alert"
+            style="padding: 1rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: #fff3cd;">
+            <h4 class="alert-heading mb-3" style="font-size: 1.5rem; font-weight: 600;">Oops! Post Not Available</h4>
+
+            <img src="https://img.freepik.com/free-vector/hand-drawn-no-data-concept_52683-127829.jpg?t=st=1724931087~exp=1724934687~hmac=558826c897d51c9aa2ec00af20cfa663f4231a98550a60d794ab428e42d72277&w=740"
+                alt="No Data"
+                style="max-width: 100%; height: auto; max-height: 300px; border-radius: 8px; object-fit: cover;" />
+
+            <p class="mt-3 mb-4" style="font-size: 1rem; color: #856404;">Looks like the post you’re looking for is
+                missing or has been moved. Please add a new post!</p>
+
+            <a href="/post/add-post" class="btn btn-primary"
+                style="padding: 0.75rem 1.5rem; font-size: 1rem; border-radius: 4px; text-transform: uppercase;">Add New
+                Post</a>
+        </div>
+
+        {{/if}}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var commentButtons = document.querySelectorAll('.comment-btn');
+            commentButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var cardBody = this.closest('.card-body');
+                    var commentSection = cardBody.querySelector('.comments-section');
+                    var commentForm = cardBody.querySelector('.comment-form');
+
+                    if (commentSection.style.display === 'none' || commentSection.style.display === '') {
+                        commentSection.style.display = 'block';
+                    } else {
+                        commentSection.style.display = 'none';
+                    }
+
+                    if (commentForm.style.display === 'none' || commentForm.style.display === '') {
+                        commentForm.style.display = 'block';
+                    } else {
+                        commentForm.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Define the API endpoint
+            try {
+
+                const response = await fetch(`http://localhost:3000/notification/count`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // Parse the JSON from the response
+                const data = await response.json();
+                console.log('data', data);
+
+                if (data.count) {
+
+                    document.getElementById('notification-count').innerText = data.count;
+                } else {
+                    document.getElementById('notification-count').style.display = 'none';
+                }
+                // Log the parsed data
+
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+                console.log('Failed to send connection request.');
+            }
+        });
+
+    </script>
+
+    <script>
+        const fun = async () => {
+            console.log("testing");
+            try {
+                const response = await fetch(`http://localhost:3000/my-network/get`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // Parse the JSON from the response
+                const data = await response.json();
+                console.log('data 1', data);
+
+                if (data.totalReq) {
+                    document.getElementById('connections-count').innerText = data.totalReq;
+                } else {
+                    document.getElementById('connections-count').style.display = 'none';
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fun();
+
+    </script>
+</body>
+
+</html>

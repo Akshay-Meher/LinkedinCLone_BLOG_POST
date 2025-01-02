@@ -1,0 +1,45 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# Dependency directories
+jspm_packages/
+
+# Testing
+coverage/
+
+# Build directories
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# NPM package lock
+package-lock.json
+yarn.lock
+
+# Optional: ignore any files related to temporary builds or package manager caches
+.pnpm-debug.log*
+.pnpm/
+
+# Optional: ignore directories related to compiled assets, e.g., for front-end build tools like Webpack
+public/
+
+config/blog-post-api-300be-firebase-adminsdk-mk4yp-a4b231dae1.json

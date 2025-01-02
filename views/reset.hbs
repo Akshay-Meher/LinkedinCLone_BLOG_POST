@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Reset Password</h3>
+                        <form action="/reset/{{token}}" method="POST">
+
+
+                            <div class="divider d-flex align-items-center my-4">
+
+                                {{#if message}}
+
+                                <div class="alert alert-danger" role="alert">
+                                    {{message}}
+                                </div>
+                                {{/if}}
+
+                                {{#if success}}
+
+                                <div class="alert  alert-success" role="alert">
+                                    {{success}}
+                                </div>
+                                {{/if}}
+                            </div>
+
+                            <!-- Password Input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="password">New Password</label>
+                                <input type="password" id="password" name="password"
+                                    class="form-control form-control-lg" placeholder="Enter your new password"
+                                    required />
+                                {{#if errors.password}}
+                                <span class="text-danger">{{errors.password.msg}}</span>
+                                {{/if}}
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="confirmPass">Confirm Password</label>
+                                <input type="password" id="confirmPass" name="confirmPass"
+                                    class="form-control form-control-lg" placeholder="Enter your confirm password"
+                                    required />
+                                {{#if errors.confirmPass}}
+                                <span class="text-danger">{{errors.confirmPass.msg}}</span>
+                                {{/if}}
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Reset Password</button>
+                            </div>
+
+                            <p class="small fw-bold mt-2 pt-1 mb-0">have an account? <a href="/user/login"
+                                    class="link-danger">Login</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

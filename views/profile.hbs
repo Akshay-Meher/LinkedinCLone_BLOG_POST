@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+    <style>
+        body {
+            background-color: #f3f2ef;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar-brand i {
+            color: #0073b1;
+            /* LinkedIn Blue */
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #0073b1;
+        }
+
+        .profile-info h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .profile-info p {
+            margin: 0;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .btn-primary {
+            background-color: #0073b1;
+            border-color: #0073b1;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+
+        .btn-primary:hover {
+            background-color: #005582;
+            border-color: #005582;
+        }
+
+        .btn-secondary {
+            background-color: #666;
+            border-color: #666;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-control {
+            border-radius: 0.375rem;
+            border: 1px solid #ced4da;
+            padding: 0.75rem;
+            font-size: 1rem;
+            color: #495057;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 115, 177, 0.25);
+            border-color: #0073b1;
+        }
+
+        .btn-toggle {
+            margin-bottom: 1rem;
+            background: none;
+            border: none;
+            color: #0073b1;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-toggle:hover {
+            text-decoration: underline;
+        }
+
+        .form-hidden {
+            display: none;
+        }
+
+        .cancel-btn {
+            background: none;
+            border: none;
+            color: #666;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .cancel-btn:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .experience-section {
+            margin-top: 30px;
+        }
+
+        .experience-item {
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-item h5 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .experience-item p {
+            font-size: 1rem;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top mb-5">
+        <div class="container">
+            <a class="navbar-brand" href="/post"><i class="fab fa-linkedin fa-2x"></i></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link active d-flex flex-column text-center" aria-current="page" href="/post">
+                            <i class="fas fa-home fa-lg"></i>
+                            <span class="small p-2"> Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/my-posts">
+                            <i class="fas fa-save fa-lg"></i>
+                            <span class="small p-2"> My Posts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/post/add-post">
+                            <i class="fas fa-plus fa-lg"></i>
+                            <span class="small p-2"> Add Post</span>
+                        </a>
+                    </li>
+                    <li class="nav-item "></li>
+                    <a class="nav-link d-flex flex-column align-items-center" aria-current="page" href="/my-network">
+                        <div class="position-relative">
+                            <i class="fa-solid fa-users-line fa-lg"></i>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                id="connections-count">
+
+                            </span>
+                        </div>
+                        <span class="small">My Network</span>
+                    </a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link d-flex flex-column align-items-center" aria-current="page"
+                            href="/chat/start">
+                            <div class="position-relative">
+                                <i class="fas fa-comment-dots"></i>
+                            </div>
+                            <span class="small">Messaging</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link d-flex flex-column align-items-center" aria-current="page"
+                            href="/notification">
+                            <div class="position-relative">
+                                <i class="fa fa-bell fa-lg"></i>
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                    id="notification-count">
+
+                                </span>
+                            </div>
+                            <span class="small">Notification</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                            id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle"
+                                height="30" alt="Profile" />
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="/profile">My profile</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <div class="profile-header">
+            <img src="{{user.profileImage}}" alt="Profile Photo" class="profile-photo">
+            <div class="profile-info">
+                <h1>{{user.name}}</h1>
+                <p>Email: {{user.email}}</p>
+                <button class="btn btn-primary btn-toggle" id="editProfileButton">Edit Profile</button>
+            </div>
+        </div>
+
+        <div class="form-container form-hidden" id="editProfileForm">
+            <h2>Edit Profile</h2>
+            <form action="/profile/updateprofile" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="username">Name</label>
+                    <input type="text" class="form-control" id="username" name="name" value="{{user.name}}">
+                    {{#if errors.name}}
+                    <span class="text-danger"> {{errors.name.msg}}</span>
+                    {{/if}}
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{user.email}}">
+                    {{#if errors.email}}
+                    <span class="text-danger"> {{errors.email.msg}}</span>
+                    {{/if}}
+                </div>
+                <div class="form-group">
+                    <label for="profile_img">Profile Picture</label>
+                    <input type="file" class="form-control" id="profile_img" name="profile_img">
+                    {{#if errors.profile_img}}
+                    <span class="text-danger"> {{errors.profile_img.msg}}</span>
+                    {{/if}}
+                </div>
+                <button type="submit" class="btn btn-primary m-2">Save Changes</button>
+                <button type="button" class="m-2 btn  btn-secondary" id="cancelEditProfileButton">Cancel</button>
+            </form>
+        </div>
+
+        <div class="form-container mt-5">
+            <h2>Add Experience</h2>
+            <button class="btn btn-primary btn-toggle" id="addExperienceButton">Add Experience</button>
+            <div class="form-container form-hidden" id="addExperienceForm">
+                <form action="/profile/add-experience/{{user.id}}" method="POST">
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title*</label>
+                        <input type="text" class="form-control" id="jobTitle" name="jobTitle" placeholder="Job Title"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyName">Company Name*</label>
+                        <input type="text" class="form-control" id="companyName" name="companyName"
+                            placeholder="Company Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Start Date*</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate" required>
+                    </div>
+                    <div class="form-group m-2">
+
+                        <input type="checkbox" name="present" id="present">
+                        <span class="fs-6">currently working here</span>
+                    </div>
+                    <div class="form-group" id="endDate">
+                        <label for="endDate">End Date</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate">
+                    </div>
+                    <button type="submit" class="btn btn-primary m-2">Add Experience</button>
+                    <button type="button" class="m-2 btn  btn-secondary" id="cancelExperienceButton">Cancel</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="mt-4">
+            <h2 class="section-title">Experience</h2>
+            {{#if experiences.length}}
+            {{#each experiences}}
+            {{!-- <div class="mb-3">
+                <h5>{{jobTitle}}</h5>
+                <p>{{ companyName}} | {{ dateFormateOnly startDate}} - {{ dateFormateOnly endDate}}</p>
+                <ul>
+                    <li>Developed and maintained web applications using modern JavaScript frameworks.</li>
+                    <li>Led a team of 5 engineers and conducted code reviews.</li>
+                </ul>
+            </div> --}}
+            <div class="experience-item">
+                <h5>{{jobTitle}}</h5>
+                <p>{{companyName}} | {{dateFormateOnly startDate}} - {{#if endDate }} {{dateFormateOnly endDate}}
+                    {{else}} Present {{/if}}</p>
+                <ul>
+                    <li>Developed and maintained web applications using modern JavaScript frameworks.</li>
+                    <li>Led a team of 5 engineers and conducted code reviews.</li>
+                </ul>
+            </div>
+            {{/each}}
+            {{else}}
+            <p>No experiences found.</p>
+            {{/if}}
+        </div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const editProfileButton = document.getElementById('editProfileButton');
+            const editProfileForm = document.getElementById('editProfileForm');
+            const cancelEditProfileButton = document.getElementById('cancelEditProfileButton');
+            const addExperienceButton = document.getElementById('addExperienceButton');
+            const addExperienceForm = document.getElementById('addExperienceForm');
+            const cancelExperienceButton = document.getElementById('cancelExperienceButton');
+
+            editProfileButton.addEventListener('click', function () {
+                editProfileForm.classList.toggle('form-hidden');
+                editProfileButton.classList.toggle('d-none');
+            });
+
+            cancelEditProfileButton.addEventListener('click', function () {
+                editProfileForm.classList.add('form-hidden');
+                editProfileButton.classList.remove('d-none');
+            });
+
+            addExperienceButton.addEventListener('click', function () {
+                addExperienceForm.classList.toggle('form-hidden');
+                addExperienceButton.classList.toggle('d-none');
+            });
+
+            cancelExperienceButton.addEventListener('click', function () {
+                addExperienceForm.classList.add('form-hidden');
+                addExperienceButton.classList.remove('d-none');
+            });
+
+
+            const presentCheckbox = document.getElementById('present');
+            const endDateInput = document.getElementById('endDate');
+
+            presentCheckbox.addEventListener('change', function (e) {
+                let ifPresent = e.target.checked;
+                if (ifPresent) {
+                    endDateInput.style.display = 'none'; // Hide the end date input
+                } else {
+                    endDateInput.style.display = 'block'; // Show the end date input
+                }
+            });
+
+        });
+    </script>
+    <!-- Include JavaScript files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Define the API endpoint
+            try {
+
+                const response = await fetch(`http://localhost:3000/notification/count`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // Parse the JSON from the response
+                const data = await response.json();
+                console.log('data', data);
+
+                if (data.count) {
+
+                    document.getElementById('notification-count').innerText = data.count;
+                } else {
+                    document.getElementById('notification-count').style.display = 'none';
+                }
+                // Log the parsed data
+
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+                console.log('Failed to send connection request.');
+            }
+        });
+
+    </script>
+
+
+    <script>
+        const fun = async () => {
+            console.log("testing");
+            try {
+                const response = await fetch(`http://localhost:3000/my-network/get`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // Parse the JSON from the response
+                const data = await response.json();
+                console.log('data 1', data);
+
+                if (data.totalReq) {
+                    document.getElementById('connections-count').innerText = data.totalReq;
+                } else {
+                    document.getElementById('connections-count').style.display = 'none';
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fun();
+
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-color: #f3f2ef;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #0073b1;
+        }
+
+        .profile-info h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .profile-info p {
+            margin: 0;
+            font-size: 1rem;
+            color: #777;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin-top: 20px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 0.375rem;
+            border: 1px solid #ced4da;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+            border-color: #007bff;
+        }
+
+        .btn-primary {
+            background-color: #0073b1;
+            border-color: #0073b1;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-toggle {
+            margin-bottom: 1rem;
+        }
+
+        .form-hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top mb-5">
+        <div class="container">
+            <a class="navbar-brand" href="/post"><i class="fab fa-linkedin fa-2x"></i></a>
+            <form class="input-group" style="width: 400px">
+                <input type="search" class="form-control" placeholder="Type query" aria-label="Search" />
+                <button class="btn btn-outline-primary" type="button" style="padding: .45rem 1.5rem .35rem;">
+                    Search
+                </button>
+            </form>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link active d-flex flex-column text-center" aria-current="page" href="/post">
+                            <i class="fas fa-home fa-lg"></i>
+                            <span class="small p-2"> Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/my-posts">
+                            <i class="fas fa-save fa-lg"></i>
+                            <span class="small p-2"> My Posts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/post/add-post">
+                            <i class="fas fa-plus fa-lg"></i>
+                            <span class="small p-2"> Add Post</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                            id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle"
+                                height="30" alt="Profile" />
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="/profile">My profile</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="profile-header">
+                    <img src="/{{user.profileImage}}" alt="Profile Photo" class="profile-photo">
+                    <div class="profile-info">
+                        <h1>{{user.name}}</h1>
+                        <p>Email: {{user.email}}</p>
+                        <button class="btn btn-primary btn-toggle" id="editProfileButton">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-container form-hidden" id="editProfileForm">
+                    <h2>Edit Profile</h2>
+                    <form action="/profile/updateprofile" method="POST" enctype="multipart/form-data"
+                        class="shadow p-3 mb-5 bg-white rounded">
+                        <div class="form-group">
+                            <label for="username">Name</label>
+                            <input type="text" class="form-control" id="username" name="name" value="{{user.name}}">
+                            {{#if errors.name}}
+                            <span class="text-danger"> {{errors.name.msg}}</span>
+                            {{/if}}
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{user.email}}">
+                            {{#if errors.email}}
+                            <span class="text-danger"> {{errors.email.msg}}</span>
+                            {{/if}}
+                        </div>
+                        <div class="form-group">
+                            <label for="profile_img">Profile Picture</label>
+                            <input type="file" class="form-control" id="profile_img" name="profile_img">
+                            {{#if errors.profile_img}}
+                            <span class="text-danger"> {{errors.profile_img.msg}}</span>
+                            {{/if}}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" id="cancelEditProfileButton">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <h2>Add Experience</h2>
+                    <button class="btn btn-primary btn-toggle" id="addExperienceButton">Add Experience</button>
+                    <div class="form-container form-hidden" id="addExperienceForm">
+                        <form action="/profile/add-experience/{{user.id}}" method="POST"
+                            class="shadow p-3 mb-5 bg-white rounded">
+                            <div class="form-group">
+                                <label for="jobTitle">Job Title</label>
+                                <input type="text" class="form-control" id="jobTitle" name="jobTitle" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="companyName">Company Name</label>
+                                <input type="text" class="form-control" id="companyName" name="companyName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDate">Start Date</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate">End Date</label>
+                                <input type="date" class="form-control" id="endDate" name="endDate">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Experience</button>
+                            <button type="button" class="btn btn-secondary" id="cancelExperienceButton">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for toggling form visibility -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const editProfileButton = document.getElementById('editProfileButton');
+            const editProfileForm = document.getElementById('editProfileForm');
+            const cancelEditProfileButton = document.getElementById('cancelEditProfileButton');
+            const addExperienceButton = document.getElementById('addExperienceButton');
+            const addExperienceForm = document.getElementById('addExperienceForm');
+            const cancelExperienceButton = document.getElementById('cancelExperienceButton');
+
+            editProfileButton.addEventListener('click', function () {
+                editProfileForm.classList.toggle('form-hidden');
+                editProfileButton.classList.toggle('d-none');
+            });
+
+            cancelEditProfileButton.addEventListener('click', function () {
+                editProfileForm.classList.add('form-hidden');
+                editProfileButton.classList.remove('d-none');
+            });
+
+            addExperienceButton.addEventListener('click', function () {
+                addExperienceForm.classList.toggle('form-hidden');
+                addExperienceButton.classList.toggle('d-none');
+            });
+
+            cancelExperienceButton.addEventListener('click', function () {
+                addExperienceForm.classList.add('form-hidden');
+                addExperienceButton.classList.remove('d-none');
+            });
+        });
+    </script>
+</body>
+
+</html> --}}
+
+
+
+
+{{!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/path/to/dashboard.css">
+
+    <style>
+        body {
+            background-color: #f3f2ef;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #fff;
+        }
+
+        .profile-info {
+            margin-left: 20px;
+        }
+
+        .profile-info h1 {
+            margin: 0;
+            font-size: 1.75rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .profile-info p {
+            margin: 0;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .edit-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            color: #0073b1;
+        }
+
+        .edit-icon:hover {
+            color: #0056b3;
+        }
+
+        .form-container {
+            display: none;
+            max-width: 800px;
+            margin-top: 20px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 0.375rem;
+            border: 1px solid #ced4da;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+            border-color: #007bff;
+        }
+
+        .cancel-btn {
+            background: none;
+            border: none;
+            color: #666;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .cancel-btn:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            background-color: #0073b1;
+            border-color: #0073b1;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-secondary {
+            color: #666;
+            background-color: transparent;
+            border: none;
+            font-size: 1.25rem;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .btn-secondary:hover {
+            color: #333;
+        }
+
+        .experience-section {
+            margin-top: 40px;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .experience-header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: #333;
+        }
+
+        .experience-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .experience-item h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #0073b1;
+        }
+
+        .experience-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .experience-item .edit-icon {
+            position: static;
+            margin-left: 10px;
+            font-size: 1rem;
+        }
+
+        /* Add animation for showing and hiding forms */
+        .form-slide-down {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .form-slide-up {
+            animation: slideUp 0.3s ease-in;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        .navbar-brand i {
+            color: #0073b1;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: #0073b1;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top mb-5">
+        <div class="container">
+            <a class="navbar-brand" href="/post"><i class="fab fa-linkedin fa-2x"></i></a>
+            <form class="input-group" style="width: 400px">
+                <input type="search" class="form-control" placeholder="Type query" aria-label="Search" />
+                <button class="btn btn-outline-primary" type="button" style="padding: .45rem 1.5rem .35rem;">
+                    Search
+                </button>
+            </form>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link active d-flex flex-column text-center" aria-current="page" href="/post">
+                            <i class="fas fa-home fa-lg"></i>
+                            <span class="small p-2"> Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/my-posts">
+                            <i class="fas fa-save fa-lg"></i>
+                            <span class="small p-2"> My Posts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-2 pt-1">
+                        <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/post/add-post">
+                            <i class="fas fa-plus fa-lg"></i>
+                            <span class="small p-2"> Add Post</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                            id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle"
+                                height="30" alt="Profile" />
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="/profile">My profile</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <div class="profile-header">
+            <img src="/{{user.profileImage}}" alt="Profile Photo" class="profile-photo">
+            <div class="profile-info">
+                <h1>{{user.name}}</h1>
+                <p>{{user.headline}}</p>
+                <p>{{user.location}}</p>
+                <p>Email: {{user.email}}</p>
+            </div>
+            <i class="fas fa-pencil-alt edit-icon" id="editProfileButton"></i>
+        </div>
+
+        <!-- Profile Edit Form -->
+        <div class="form-container" id="editProfileForm">
+            <button type="button" class="btn btn-secondary" id="cancelEditButton">&times;</button>
+            <h2>Edit Profile</h2>
+            <form action="/profile/updateprofile" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="name">name</label>
+                    <input type="text" class="form-control" id="username" name="name" value="{{user.name}}">
+
+                    {{#if errors.name}}
+                    <span class="text-danger"> {{errors.name.msg}}</span>
+                    {{/if}}
+                </div>
+
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{user.email}}">
+
+                    {{#if errors.email}}
+                    <span class="text-danger"> {{errors.email.msg}}</span>
+                    {{/if}}
+
+                </div>
+                <div class="form-group">
+                    <label for="profile_img">Profile Image</label>
+                    <input type="file" class="form-control" id="profile_img" name="profile_img">
+
+                    {{#if errors.profile_img}}
+                    <span class="text-danger"> {{errors.profile_img.msg}}</span>
+                    {{/if}}
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="cancel-btn" id="cancelEditProfileButton">Cancel</button>
+            </form>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="experience-section">
+            <div class="experience-header">
+                <h2>Experience</h2>
+                <i class="fas fa-plus edit-icon" id="addExperienceButton"></i>
+            </div>
+
+            <!-- Example Experience Item -->
+            <div class="experience-item">
+                <h3>Software Engineer at ABC Corp</h3>
+                <p>January 2020 - Present</p>
+                <p>Location: New York, USA</p>
+                <i class="fas fa-pencil-alt edit-icon"></i>
+            </div>
+
+            <!-- Add more experience items as needed -->
+
+            <!-- Experience Edit Form -->
+            <div class="form-container" id="editExperienceForm">
+                <button type="button" class="btn btn-secondary" id="cancelExperienceEditButton">&times;</button>
+                <h2>Edit Experience</h2>
+                <form action="/profile/updateExperience" method="POST">
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input type="text" class="form-control" id="jobTitle" name="jobTitle">
+                    </div>
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" class="form-control" id="companyName" name="companyName">
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" name="location">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('editProfileButton').addEventListener('click', function () {
+            const form = document.getElementById('editProfileForm');
+            form.style.display = 'block';
+            form.classList.remove('form-slide-up');
+            form.classList.add('form-slide-down');
+        });
+
+        document.getElementById('cancelEditButton').addEventListener('click', function () {
+            const form = document.getElementById('editProfileForm');
+            form.classList.remove('form-slide-down');
+            form.classList.add('form-slide-up');
+            setTimeout(() => form.style.display = 'none', 300);
+        });
+
+        document.getElementById('addExperienceButton').addEventListener('click', function () {
+            const form = document.getElementById('editExperienceForm');
+            form.style.display = 'block';
+            form.classList.remove('form-slide-up');
+            form.classList.add('form-slide-down');
+        });
+
+        document.getElementById('cancelExperienceEditButton').addEventListener('click', function () {
+            const form = document.getElementById('editExperienceForm');
+            form.classList.remove('form-slide-down');
+            form.classList.add('form-slide-up');
+            setTimeout(() => form.style.display = 'none', 300);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html> --}}

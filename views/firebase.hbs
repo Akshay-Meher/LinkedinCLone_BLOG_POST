@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="notifyButton">notification</button>
+</body>
+
+
+{{!--
+<script type="module" src="firebaseNotification.js"></script> --}}
+
+<script type="module" src="/firebaseNotification.js"></script>
+
+
+{{!--
+<script type="module">
+    import { messaging, onMessage1 } from "/firebaseClient.js";
+    import { getToken } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-messaging.js";
+
+
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+            .register("/firebase-messaging-sw.js")
+            .then(function (registration) {
+                console.log(
+                    "Service Worker registered with scope:",
+                    registration.scope
+                );
+            })
+            .catch(function (err) {
+                console.log("Service Worker registration failed:", err);
+            });
+    }
+
+    onMessage1(messaging, (payload) => {
+        console.log("Payload:::", payload);
+        new Notification(payload.notification.title, { body: payload.notification.body })
+    });
+
+
+    async function requestPermission() {
+        const permission = await Notification.requestPermission();
+
+        if (permission === "granted") {
+            const vapidKey =
+                "BIb2u3k9KLp3Ql9rNG2qEPsU-9AD_ZTbNc3FYO-OBbHG1v-BS8oj4APQ3Dnh0B-n7ArwBG0NH3Ld92bLvrK2EfQ";
+            const token = await getToken(messaging, { vapidKey: vapidKey });
+
+            console.log("Token From Fronend::", token);
+
+            // ----- Fetching save-token route to save token into database
+
+            await fetch("/saveToken", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token }),
+            });
+
+            document
+                .getElementById("notifyButton")
+                .addEventListener("click", async () => {
+                    const payload = {
+                        title: "New Notification",
+                        body: "You have a new message!",
+                    };
+
+                    try {
+                        const response = await fetch("/getToken");
+
+                        if (!response) {
+                            throw new Error("Token not found or other error");
+                        }
+
+                        const token = await response.text();
+
+                        console.log("Token after clicking btn: ", token);
+
+                        if (token) {
+                            const response = await fetch("/sendNotification", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ token, payload }),
+                            });
+
+                            const result = await response.json();
+                            console.log("Notification response:", result);
+                        } else {
+                            console.error("No token available");
+                        }
+                    } catch (error) {
+                        console.error("Error fetching token:", error);
+                    }
+                });
+        } else if (permission === "denied") {
+            alert("You denied for the notification!");
+        }
+    }
+
+    requestPermission();
+
+</script> --}}
+
+</html>
